@@ -1,93 +1,142 @@
-const todoList = () => {
-    all = []
-    const add = (todoItem) => {
-      all.push(todoItem)
+//import { ESLint } from "eslint";
+/*const http = require("http");
+const fs = require("fs");
+const server = http.createServer((req,res) =>{
+    fs.readFile("sample.txt",(err,data) => {
+        res.end(data);
+        //const stream = fs.creaateReadStream("sample.txt");
+    //stream.pipe(res);
+    })
+} );
+server.listen(3000);*/
+/*const http = require("http");
+const fs = require("fs");
+/*fs.readFile("home.html", (err, home) => {
+    console.log(home.toString());
+  });
+  fs.readFile("home.html", (err, home) => {
+    if (err) {
+      throw err;
     }
-    const markAsComplete = (index) => {
-      all[index].completed = true
-    }
-  
-    const overdue = () => {
-      // Write the date check condition here and return the array of overdue items accordingly.
-      // FILL YOUR CODE HERE
-      // ..
-      // ..
-      // ..
-      return all.filter((item)=> item.dueDate<new Date().toLocaleDateString("en-CA"));
-    }
-  
-    const dueToday = () => {
-      // Write the date check condition here and return the array of todo items that are due today accordingly.
-      // FILL YOUR CODE HERE
-      // ..
-      // ..
-      // ..
-      return all.filter((item)=> item.dueDate==new Date().toLocaleDateString("en-CA"));
-    }
-  
-    const dueLater = () => {
-      // Write the date check condition here and return the array of todo items that are due later accordingly.
-      // FILL YOUR CODE HERE
-      // ..
-      // ..
-      // ..
-      return all.filter((item)=> item.dueDate>new Date().toLocaleDateString("en-CA"));
-    }
-  
-    const toDisplayableList = (list) => {
-      // Format the To-Do list here, and return the output string as per the format given above.
-      // FILL YOUR CODE HERE
-      // ..
-      // ..
-      // ..
-      // return OUTPUT_STRING
-      return list.map(item=>` ${item.completed ? '[x]' : '[ ]'} ${item.title} ${item.dueDate==new Date().toLocaleDateString("en-CA")}`);
-    }
-  
-    return { all, add, markAsComplete, overdue, dueToday, dueLater, toDisplayableList };
+    http
+      .createServer((request, response) => {
+        response.writeHeader(200, { "Content-Type": "text/html" });
+        response.write(home);
+        response.end();
+      })
+      .listen(3000);
+  });
+  const readline = require("readline");
+
+const lineDetail = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+lineDetail.question(`Please provide your name - `, (name) => {
+  console.log(`Hi ${name}!`);
+  lineDetail.close();
+});
+const http = require("http");
+const fs = require("fs");
+fs.readFile("home.html", (err, home) => {
+  console.log(home.toString());
+});
+fs.readFile("home.html", (err, home) => {
+  if (err) {
+    throw err;
   }
-  
-  // ####################################### #
-  // DO NOT CHANGE ANYTHING BELOW THIS LINE. #
-  // ####################################### #
-  
-  const todos = todoList();
-  
-  const formattedDate = d => {
-    return d.toISOString().split("T")[0]
+  http
+    .createServer((request, response) => {
+      response.writeHeader(200, { "Content-Type": "text/html" });
+      response.write(home);
+      response.end();
+    })
+    .listen(3000);
+});
+const http = require("http");
+const fs = require("fs");
+
+let homeContent = "";
+let projectContent = "";
+
+fs.readFile("home.html", (err, home) => {
+  if (err) {
+    throw err;
   }
-  
-  var dateToday = new Date()
-  const today = formattedDate(dateToday)
-  const yesterday = formattedDate(
-    new Date(new Date().setDate(dateToday.getDate() - 1))
-  )
-  const tomorrow = formattedDate(
-    new Date(new Date().setDate(dateToday.getDate() + 1))
-  )
-  
-  todos.add({ title: 'Submit assignment', dueDate: yesterday, completed: false })
-  todos.add({ title: 'Pay rent', dueDate: today, completed: true })
-  todos.add({ title: 'Service Vehicle', dueDate: today, completed: false })
-  todos.add({ title: 'File taxes', dueDate: tomorrow, completed: false })
-  todos.add({ title: 'Pay electric bill', dueDate: tomorrow, completed: false })
-  
-  console.log("My Todo-list\n\n")
-  
-  console.log("Overdue")
-  var overdues = todos.overdue()
-  var formattedOverdues = todos.toDisplayableList(overdues)
-  console.log(formattedOverdues)
-  console.log("\n\n")
-  
-  console.log("Due Today")
-  let itemsDueToday = todos.dueToday()
-  let formattedItemsDueToday = todos.toDisplayableList(itemsDueToday)
-  console.log(formattedItemsDueToday)
-  console.log("\n\n")
-  
-  console.log("Due Later")
-  let itemsDueLater = todos.dueLater()
-  let formattedItemsDueLater = todos.toDisplayableList(itemsDueLater)
-  console.log(formattedItemsDueLater)
-  console.log("\n\n")
+  homeContent = home;
+});
+
+fs.readFile("project.html", (err, project) => {
+  if (err) {
+    throw err;
+  }
+  projectContent = project;
+});
+http
+  .createServer((request, response) => {
+    let url = request.url;
+    response.writeHeader(200, { "Content-Type": "text/html" });
+    switch (url) {
+      case "/project":
+        response.write(projectContent);
+        response.end();
+        break;
+      default:
+        response.write(homeContent);
+        response.end();
+        break;
+    }
+  })
+  .listen(3000);
+*/
+const http = require("http");
+const fs = require("fs");
+
+let homeContent = "";
+let projectContent = "";
+let registrationContent="";
+
+fs.readFile("home.html", (err, home) => {
+  if (err) {
+    throw err;
+  }
+  homeContent = home;
+});
+
+fs.readFile("project.html", (err, project) => {
+  if (err) {
+    throw err;
+  }
+  projectContent = project;
+});
+
+fs.readFile("registration.html",(err,reg) => {
+  if (err){
+    throw err;
+  }
+  registrationContent=reg;
+});
+
+let args=require("minimist")(process.argv.slice(2));
+
+http.createServer((request, response) => {
+    let url = request.url;
+    response.writeHeader(200, { "Content-Type": "text/html" });
+    switch (url) {
+        case "/project":
+          response.write(projectContent);
+          response.end();
+          break;
+        case "/registration":
+          response.write(registrationContent);
+          response.end();
+          break;
+
+        default:
+          response.write(homeContent);
+          response.end();
+          break;
+    }
+  })
+  .listen(args["port"]);
